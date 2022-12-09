@@ -1,3 +1,9 @@
+import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:e_incubator/check_button.dart';
+import 'package:e_incubator/cloudy_card.dart';
+import 'package:e_incubator/day_card.dart';
+import 'package:e_incubator/night_card.dart';
+import 'package:e_incubator/rain_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +20,9 @@ class Supervisor1 extends StatefulWidget {
 }
 
 class _Supervisor1State extends State<Supervisor1> {
-
+  List<String> items=["Device No. 1","Device No. 2","Device No. 3","Device No. 4"];
+  String? selectedItem="Device No. 1";
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +37,13 @@ class _Supervisor1State extends State<Supervisor1> {
         .size
         .height;
 
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
-            height: 150,
+            height: 125,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(50),
@@ -67,10 +76,10 @@ class _Supervisor1State extends State<Supervisor1> {
                     )
                 ),
                 Positioned(
-                  top: 57,
+                  top: 65,
                   left: 9,
                   child: Text(
-                    "Duty Staff : B5",
+                    "Owner : B5",
                     style: GoogleFonts.lato(
                       fontSize: 16,
                       color: Colors.orangeAccent,
@@ -78,136 +87,127 @@ class _Supervisor1State extends State<Supervisor1> {
                     ),
                   ),
                 ),
-                Positioned(
-                    top: 75,
-                    left: 9,
-                    child: Text(
-                      "Device No.: XXXX",
-                      style: GoogleFonts.lato(
-                        fontSize: 16,
-                        color: Colors.orangeAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                )
               ],
             ),
           ),
-          SizedBox(height: height*0.05,),
+          SizedBox(height: height*0.02,),
           Container(
-                  height: 200,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                          top: 40,
-                          left: 20,
-                          child: Material(
-                            child: Container(
-                              height: 150.0,
-                              width: width*0.9,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(30.0),
-                                boxShadow: [
-                                  new BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    offset: new Offset(-10, 10),
-                                    blurRadius: 20.0,
-                                    spreadRadius: 4.0,
-                                  )
-                                ]
-                              ),
-                            ),
+            height: 220,
+            child: PageView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                NightCard(),
+                DayCard(),
+                RainCard(),
+                CloudyCard(),
+              ],
+            ),
+          ),
+          SizedBox(height: height*0.03,),
+          Column(
+            children: [
+              Container(
+              child: Positioned(
+                left: 20,
+                child: SizedBox(
+                  width: width*0.9,
+                  height: height*0.08,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30.0),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 10,
+                          spreadRadius: 7,
+                          offset: Offset(1,1),
+                          color: Colors.grey.withOpacity(0.2),
+                        )
+                      ]
+                    ),
+                    child: DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        hintText: "Select The Device",
+                        hintStyle: GoogleFonts.lato(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: BorderSide(
+                            color: Colors.white,
                           )
+                        )
                       ),
-                      Positioned(
-                          top: 0,
-                          left: 30,
-                          child: Card(
-                            elevation: 15.0,
-                            shadowColor: Colors.grey.withOpacity(0.5),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Container(
-                              height: 180,
-                              width: 140,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30.0),
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage("img/night.jpg"),
-                                )
-                              ),
-                            ),
-                          )
+                      //value: selectedItem,
+                      items: items
+                        .map((item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Positioned(
+                        left: 30,
+                        child: Text(
+                          item,
+                          style: GoogleFonts.lato(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                      Positioned(
-                          top: 45,
-                          left: 180,
-                          child: Container(
-                            height: 150,
-                            width: 180,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Gazipur",
-                                  style: GoogleFonts.lato(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 20,),
-                                Text(
-                                  cdate1,
-                                  style: GoogleFonts.lato(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(height: 10,),
-                                Text(
-                                  tdata,
-                                  style: GoogleFonts.lato(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                SizedBox(height: 10,),
-                                Positioned(
-                                  top: 190,
-                                  left: 90,
-                                  right: 40,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                          "25°C ",
-                                        style: GoogleFonts.lato(
-                                          fontSize: 15,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                          "                77%",
-                                        style: GoogleFonts.lato(
-                                          fontSize: 15,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
                       )
-                    ],
+                    )
+                     .toList(),
+                      onChanged: (item) => setState(() {
+                        selectedItem = item;
+                        isVisible = ! isVisible;
+                      }
+                      ),
+                     ),
                   ),
+                ),
+              )
               ),
+              SizedBox(height: height*0.02,),
+              Visibility(
+                visible: isVisible,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CheckButton(
+                            iconImagePath: 'img/temp.jpg',
+                            buttonText: "Temperature"
+                        ),
+                        CheckButton(
+                            iconImagePath: 'img/humidity.jpg',
+                            buttonText: "Humidity"
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ]
+          ),
         ]
-      )
+      ),
     );
   }
 }
+
+//Positioned(
+//top: 75,
+//left: 9,
+//child: Text(
+//"Device No.: XXXX",
+//style: GoogleFonts.lato(
+//fontSize: 16,
+//color: Colors.orangeAccent,
+//fontWeight: FontWeight.bold,
+//),
+//)
+//)

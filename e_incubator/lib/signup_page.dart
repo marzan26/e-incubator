@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  String dropdownValue = list.first;
+  List<String> items=["Supervisor","Duty Staff","Client"];
+  String? selectedItem="Supervisor";
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery
@@ -347,7 +348,7 @@ class _SignupPageState extends State<SignupPage> {
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.0),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 10,
@@ -357,38 +358,12 @@ class _SignupPageState extends State<SignupPage> {
                       )
                     ]
                 ),
-                child: TextField(
+                child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                      label: Text.rich(
-                          TextSpan(
-                              children: <InlineSpan>[
-                                WidgetSpan(
-                                  child: Text(
-                                    "Join As",
-                                    style: GoogleFonts.lato(
-                                      fontSize: 15,
-                                      color: Colors.orangeAccent,
-                                    ),
-
-                                  ),
-                                ),
-                                WidgetSpan(
-                                    child: Text(
-                                      "*",
-                                      style: GoogleFonts.lato(
-                                        fontSize: 18,
-                                        color: Colors.redAccent,
-                                      ),
-                                    )
-                                )
-                              ]
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          )
+                    hintText: "Join As",
+                      hintStyle: GoogleFonts.lato(
+                        fontSize: 15,
+                        color: Colors.orangeAccent,
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -396,9 +371,27 @@ class _SignupPageState extends State<SignupPage> {
                             color: Colors.white,
                           )
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                  ),
+                  //value: selectedItem,
+                  items: items
+                    .map((item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Positioned(
+                        left: 30,
+                        child: Text(
+                          item,
+                          style: GoogleFonts.lato(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
                       )
+                    )
+                  )
+                   .toList(),
+                  onChanged: (item) => setState(() {
+                    selectedItem = item;
+                    }
                   ),
                 ),
               ),
