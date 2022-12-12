@@ -1,6 +1,10 @@
+import 'package:e_incubator/login_page.dart';
+import 'package:e_incubator/signup_page.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -78,54 +82,84 @@ class MainPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 60,),
-            Container(
-              width: w*0.5,
-              height: h*0.09,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
-                  image: AssetImage(
-                    "img/button.jpg"
-                  ),
-                  fit: BoxFit.cover,
-                )
-              ),
-              child: Center(
-                child: Text(
-                  "Login",
-                  style: GoogleFonts.lato(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.white,
+            TextButton(
+              child: Container(
+                width: w*0.5,
+                height: h*0.09,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "img/button.jpg"
+                    ),
+                    fit: BoxFit.cover,
+                  )
+                ),
+                child: Center(
+                  child: Text(
+                    "Login",
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
+              ),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> LoginPage()
+                 )
+                );
+              },
+            style: TextButton.styleFrom(
+              elevation: 20,
+              shadowColor: Colors.orangeAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+               )
               ),
             ),
 
             SizedBox(height: 20,),
-            Container(
-              width: w*0.5,
-              height: h*0.09,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                    image: AssetImage(
-                        "img/button.jpg"
+            TextButton(
+              child: Container(
+                width: w*0.5,
+                height: h*0.09,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image: AssetImage(
+                          "img/button.jpg"
+                      ),
+                      fit: BoxFit.cover,
+                    )
+                ),
+                child: Center(
+                  child: Text(
+                    "Sign Up",
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white,
                     ),
-                    fit: BoxFit.cover,
-                  )
-              ),
-              child: Center(
-                child: Text(
-                  "Sign Up",
-                  style: GoogleFonts.lato(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.white,
                   ),
                 ),
+              ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => SignupPage()
+                 )
+                );
+              },
+              style: TextButton.styleFrom(
+                elevation: 20,
+                shadowColor: Colors.orangeAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                )
               ),
             ),
           ]

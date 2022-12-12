@@ -1,4 +1,5 @@
 
+import 'package:e_incubator/login_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -459,34 +460,86 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             SizedBox(height: 20,),
-            Container(
-              width: w*0.5,
-              height: h*0.07,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                    image: AssetImage(
-                        "img/button.jpg"
+            TextButton(
+              child: Container(
+                width: w*0.5,
+                height: h*0.07,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image: AssetImage(
+                          "img/button.jpg"
+                      ),
+                      fit: BoxFit.cover,
+                    )
+                ),
+                child: Center(
+                  child: Text(
+                    "Sign Up",
+                    style: GoogleFonts.lato(
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.white,
                     ),
-                    fit: BoxFit.cover,
-                  )
-              ),
-              child: Center(
-                child: Text(
-                  "Sign Up",
-                  style: GoogleFonts.lato(
-                    textStyle: Theme.of(context).textTheme.headline4,
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white,
                   ),
                 ),
               ),
+              onPressed: (){
+                openDialog(context);
+              },
+              style: TextButton.styleFrom(
+                elevation: 20,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)
+                )
+              ),
             ),
-    ]),
-    ),
-      );
+          ]
+        ),
+      ),
+    );
   }
+  Future openDialog(context) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Enter Authentication Code"),
+        titleTextStyle: GoogleFonts.lato(
+          fontSize: 15,
+          color: Colors.black,
+        ),
+        content: TextField(
+          autofocus: true,
+          decoration: InputDecoration(
+            hintText: "Code",
+            hintStyle: GoogleFonts.lato(
+              fontSize: 15,
+              color: Colors.grey,
+            )
+          ),
+        ),
+        actions: [
+          TextButton(
+              onPressed: (){},
+              child: TextButton(
+                child: Text(
+                  "Submit",
+                  style: GoogleFonts.lato(
+                    fontSize: 15,
+                    color: Colors.grey,
+                  ),
+                ),
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => LoginPage()
+                    )
+                  );
+                },
+              )
+          )
+        ],
+      )
+  );
 }
 
 //SizedBox(
