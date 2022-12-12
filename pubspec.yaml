@@ -47,6 +47,8 @@ dependencies:
   transformer_page_view: ^0.1.6
   intl: ^0.17.0
   weather: ^2.0.1
+  get:
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
